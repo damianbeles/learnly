@@ -8,8 +8,8 @@
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "resizeMode": "cover",
+      "backgroundColor": "#00A3E8"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -20,11 +20,8 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#00A3E8"
       }
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
     }
   }
 }
