@@ -3,12 +3,13 @@ import { Colors } from '../constants/colors';
 
 const theme = createTheme({
   components: {
-    Text: ({ title, label }) => ({
+    Text: ({ title, label, name }) => ({
       style: {
         fontFamily: label ? 'Futura Medium BT' : 'Futura',
-        color: title || label ? Colors.cerulean : Colors.white,
-        fontSize: title ? 96 : label ? 64 : 24,
-        fontWeight: title ? 'bold' : 'normal',
+        color:
+          title || label ? Colors.cerulean : name ? Colors.black : Colors.white,
+        fontSize: title ? 96 : label ? 64 : name ? 48 : 24,
+        fontWeight: title || name ? 'bold' : 'normal',
       },
     }),
     Input: {
@@ -26,6 +27,13 @@ const theme = createTheme({
       },
       inputContainerStyle: {
         borderBottomWidth: 0,
+      },
+    },
+    Avatar: {
+      size: 156,
+      containerStyle: {
+        borderWidth: 4,
+        borderColor: Colors.cerulean,
       },
     },
     Button: {

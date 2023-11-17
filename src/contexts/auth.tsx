@@ -7,7 +7,10 @@ import {
 } from 'react';
 import axios from 'axios';
 
-export const AuthContext = createContext(null);
+export const AuthContext = createContext<{
+  actions: { signIn: (jwt: string) => void; signOut: () => void };
+  isLoggedIn: boolean;
+} | null>(null);
 
 export function AuthProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -30,7 +33,7 @@ export function AuthProvider({ children }) {
       actions: { signIn, signOut },
       isLoggedIn,
     }),
-    []
+    [isLoggedIn]
   );
 
   return (

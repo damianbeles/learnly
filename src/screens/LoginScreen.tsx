@@ -5,8 +5,11 @@ import { KSpacer } from '../components/KSpacer';
 import { Colors } from '../constants/colors';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { useState } from 'react';
+import { useAuth } from '../hooks/useAuth';
 
 export function LoginScreen() {
+  const { signIn } = useAuth();
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -48,6 +51,7 @@ export function LoginScreen() {
               style={{ top: 2 }}
             />
           }
+          onPress={() => signIn('randomJwt')}
         />
       </View>
     </View>
