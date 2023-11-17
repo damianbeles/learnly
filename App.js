@@ -1,22 +1,31 @@
-import { MainScreen } from './src/screens/MainScreen';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { HomeScreen } from './src/screens/HomeScreen';
+import { setDefaultAxiosHeaders } from './src/constants/axios';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Navigation } from './src/navigation';
+import { AuthProvider } from './src/contexts/auth';
 
-const AppStack = createNativeStackNavigator();
+import * as SplashScreen from 'expo-splash-screen';
+import { WithFonts } from './src/wrappers/WithFonts';
+import { View } from 'react-native';
+import { WithTheming } from './src/wrappers/WithTheming';
+
+import './src/constants/fontawesome';
+
+SplashScreen.preventAutoHideAsync();
+
+setDefaultAxiosHeaders();
 
 export default function App() {
-  const isLogged = false;
-
   return (
-    <NavigationContainer>
-      <AppStack.Navigator screenOptions={{ headerShown: false }}>
-        {!isLogged ? (
-          <AppStack.Screen name="Main" component={MainScreen} />
-        ) : (
-          <AppStack.Screen name="Home" component={HomeScreen} />
-        )}
-      </AppStack.Navigator>
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <WithFonts>
+        <WithTheming>
+          <AuthProvider>
+            <View style={{ flex: 1 }} onLayout={SplashScreen.hideAsync}>
+              <Navigation />
+            </View>
+          </AuthProvider>
+        </WithTheming>
+      </WithFonts>
+    </SafeAreaProvider>
   );
 }
