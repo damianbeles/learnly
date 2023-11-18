@@ -1,9 +1,13 @@
-import { Typography } from 'react-native-ui-lib';
+import { Assets, Typography } from 'react-native-ui-lib';
 import { Colors } from './colors';
 import { Colors as RNUILibColors } from 'react-native-ui-lib';
 
 export const configTheme = () => {
   RNUILibColors.loadColors(Colors);
+
+  Assets.loadAssetsGroup('icons', {
+    teddyBear: require('../../assets/teddy-bear.png'),
+  });
 
   Typography.loadTypographies({
     title: {
