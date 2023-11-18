@@ -19,6 +19,12 @@ export const configTheme = () => {
       fontFamily: 'Futura',
       color: Colors.cerulean,
     },
+    bold: {
+      fontWeight: 'bold',
+    },
+    cerulean: {
+      color: Colors.cerulean,
+    },
     button: {
       color: Colors.white,
       fontFamily: 'Futura',
@@ -29,7 +35,6 @@ export const configTheme = () => {
       fontSize: 48,
       fontFamily: 'Futura',
       fontWeight: 'bold',
-      color: Colors.black,
     },
   });
 };
