@@ -7,15 +7,12 @@ import {
 } from 'react';
 import axios from 'axios';
 
-export const AuthContext = createContext<{
-  actions: { signIn: (jwt: string) => void; signOut: () => void };
-  isLoggedIn: boolean;
-} | null>(null);
+export const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const signIn = useCallback((jwt: string) => {
+  const signIn = useCallback(jwt => {
     axios.interceptors.request.use(config => {
       config.headers.Authorization = `Bearer ${jwt}`;
       return config;
