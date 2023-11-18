@@ -1,4 +1,4 @@
-import { ScrollView } from 'react-native';
+import { ActivityIndicator, FlatList, ScrollView } from 'react-native';
 import { Curtains } from '../components/layout/Curtains';
 import { KSpacer } from '../components/KSpacer';
 import { View, Text } from 'react-native-ui-lib';
@@ -7,9 +7,22 @@ import { KButton } from '../components/KButton';
 import { useAuth } from '../hooks/useAuth';
 import { Colors } from '../constants/colors';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { BASE_URL, PIC_URL } from '../constants/axios';
 
 export function ChildrenScreen() {
   const { signOut } = useAuth();
+
+  const [children, setChildren] = useState([]);
+  const [loading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    axios.get('/users/me?populate[children][populate]=*').then(res => {
+      setChildren(res.data.children);
+      setIsLoading(false);
+    });
+  }, []);
 
   return (
     <View flex center>
@@ -17,31 +30,22 @@ export function ChildrenScreen() {
       <Text title>Welcome!</Text>
       <KSpacer h={64} />
       <View style={{ width: '80%' }}>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          <View centerH>
-            <KAvatar image="https://randomuser.me/api/portraits/men/36.jpg" />
-            <KSpacer h={24} />
-            <Text name>Alexandru</Text>
-          </View>
-          <KSpacer w={144} />
-          <View centerH>
-            <KAvatar image="https://randomuser.me/api/portraits/men/36.jpg" />
-            <KSpacer h={24} />
-            <Text name>Alexandru</Text>
-          </View>
-          <KSpacer w={144} />
-          <View centerH>
-            <KAvatar image="https://randomuser.me/api/portraits/men/36.jpg" />
-            <KSpacer h={24} />
-            <Text name>Alexandru</Text>
-          </View>
-          <KSpacer w={144} />
-          <View centerH>
-            <KAvatar image="https://randomuser.me/api/portraits/men/36.jpg" />
-            <KSpacer h={24} />
-            <Text name>Alexandru</Text>
-          </View>
-        </ScrollView>
+        {loading ? (
+          <ActivityIndicator size="large" />
+        ) : (
+          <FlatList
+            horizontal
+            data={children}
+            renderItem={({ item }) => (
+              <View centerH width={280}>
+                <KAvatar image={PIC_URL + item.avatar.url} />
+                <KSpacer h={24} />
+                <Text name>{item.firstName}</Text>
+              </View>
+            )}
+            ItemSeparatorComponent={() => <KSpacer w={144} />}
+          />
+        )}
         <KSpacer h={60} />
         <KButton
           title="Log Out"

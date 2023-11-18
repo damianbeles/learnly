@@ -10,6 +10,7 @@ import { View } from 'react-native';
 import './src/constants/fontawesome';
 import { Typography } from 'react-native-ui-lib';
 import { configTheme } from './src/constants/theming';
+import { WithProgrammaticalyLogin } from './src/wrappers/WithProgrammaticalyLogin';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -22,9 +23,11 @@ export default function App() {
     <SafeAreaProvider>
       <WithFonts>
         <AuthProvider>
-          <View style={{ flex: 1 }} onLayout={SplashScreen.hideAsync}>
-            <Navigation />
-          </View>
+          <WithProgrammaticalyLogin>
+            <View style={{ flex: 1 }} onLayout={SplashScreen.hideAsync}>
+              <Navigation />
+            </View>
+          </WithProgrammaticalyLogin>
         </AuthProvider>
       </WithFonts>
     </SafeAreaProvider>

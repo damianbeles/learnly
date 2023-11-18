@@ -8,12 +8,26 @@ import { Colors } from '../constants/colors';
 import { KeyboardAvoidingView, Platform } from 'react-native';
 import { KButton } from '../components/KButton';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import axios from 'axios';
 
 export function LoginScreen() {
   const { signIn } = useAuth();
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const login = () => {
+    axios
+      .post('/auth/local', {
+        identifier: username,
+        password,
+      })
+      .then(res => {
+        console.log(res.data.jwt);
+        return res;
+      })
+      .then(res => signIn(res.data.jwt));
+  };
 
   return (
     <View flex>
@@ -61,7 +75,7 @@ export function LoginScreen() {
           <KSpacer h={20} />
           <KButton
             title="Next"
-            onPress={() => signIn('sunt eu')}
+            onPress={login}
             iconRight={
               <FontAwesomeIcon
                 icon={['fas', 'chevron-right']}
