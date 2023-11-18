@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const setAxiosAuthorization = (jwt: string) => {
+export const setAxiosAuthorization = jwt => {
   axios.interceptors.request.use(config => {
     config.headers.Authorization = `Bearer ${jwt}`;
     return config;

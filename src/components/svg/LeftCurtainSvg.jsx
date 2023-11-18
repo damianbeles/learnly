@@ -1,7 +1,7 @@
 import * as React from 'react';
-import Svg, { Path, SvgProps } from 'react-native-svg';
+import Svg, { Path } from 'react-native-svg';
 
-export function LeftCurtainSvg(props: SvgProps) {
+export function LeftCurtainSvg(props) {
   return (
     <Svg width={581} height={404} viewBox="0 0 581 404" fill="none" {...props}>
       <Path
