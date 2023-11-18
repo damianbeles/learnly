@@ -5,6 +5,8 @@ import { LoginScreen } from './screens/LoginScreen';
 import { ChildrenScreen } from './screens/ChildrenScreen';
 import { HomeScreen } from './screens/HomeScreen';
 import { SettingsScreen } from './screens/SettingsScreen';
+import { QuizScreen } from './screens/QuizScreen';
+import { CongratsScreen } from './screens/CongratsScreen';
 
 const AppStack = createNativeStackNavigator();
 
@@ -18,6 +20,8 @@ export function Navigation() {
           <>
             <AppStack.Screen name="ChildrenScreen" component={ChildrenScreen} />
             <AppStack.Screen name="HomeScreen" component={HomeScreen} />
+            <AppStack.Screen name="QuizScreen" component={QuizScreen} />
+            <AppStack.Screen name="CongratsScreen" component={CongratsScreen} />
             <AppStack.Screen name="SettingsScreen" component={SettingsScreen} />
           </>
         ) : (

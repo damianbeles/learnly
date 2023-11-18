@@ -18,8 +18,15 @@ export function HomeScreen({ navigation, route }) {
 
   const kid = route.params.child;
 
-  const [isLoadingQuizzes, setIsLoadingQuizzes] = useState(false);
+  const [isLoadingQuizzes, setIsLoadingQuizzes] = useState(true);
   const [quizzes, setQuizzes] = useState([]);
+
+  const goToQuizScreen = () => {
+    navigation.navigate('QuizScreen', {
+      child: kid,
+      quiz: quizzes[kid.lastCompletedQuiz].attributes,
+    });
+  };
 
   useEffect(() => {
     (async () => {
@@ -70,7 +77,8 @@ export function HomeScreen({ navigation, route }) {
             </Text>
           </View>
           <TouchableOpacity
-            style={{ alignItems: 'center', alignSelf: 'flex-end' }}>
+            style={{ alignItems: 'center', alignSelf: 'flex-end' }}
+            onPress={goToQuizScreen}>
             <View
               width={200}
               height={200}
