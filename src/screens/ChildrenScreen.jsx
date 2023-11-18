@@ -22,8 +22,8 @@ export function ChildrenScreen({ navigation }) {
   const [children, setChildren] = useState([]);
   const [loading, setIsLoading] = useState(true);
 
-  const goToHomeScreen = () => {
-    navigation.navigate('HomeScreen');
+  const goToHomeScreen = child => {
+    navigation.navigate('HomeScreen', { child });
   };
 
   useEffect(() => {
@@ -46,7 +46,7 @@ export function ChildrenScreen({ navigation }) {
             horizontal
             data={children}
             renderItem={({ item }) => (
-              <TouchableOpacity onPress={goToHomeScreen}>
+              <TouchableOpacity onPress={() => goToHomeScreen(item)}>
                 <View centerH width={280}>
                   <KAvatar image={PIC_URL + item.avatar.url} />
                   <KSpacer h={24} />
