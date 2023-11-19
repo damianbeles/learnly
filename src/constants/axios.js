@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const prod = false;
+const prod = true;
 
 export const BASE_URL = prod
   ? 'https://proper-captain-d6318c7772.strapiapp.com'

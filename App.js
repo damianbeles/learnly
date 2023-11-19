@@ -18,6 +18,10 @@ setDefaultAxiosHeaders();
 
 configTheme();
 
+console.disableYellowBox = true;
+import { LogBox } from 'react-native';
+LogBox.ignoreAllLogs();
+
 export default function App() {
   return (
     <SafeAreaProvider>
