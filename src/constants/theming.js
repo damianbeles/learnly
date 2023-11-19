@@ -32,6 +32,7 @@ export const configTheme = () => {
     cerulean: {
       color: Colors.cerulean,
     },
+
     button: {
       color: Colors.white,
       fontFamily: 'Futura',
