@@ -1,9 +1,11 @@
 import { Image, Text, View } from 'react-native-ui-lib';
 import { Colors } from '../constants/colors';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import axios from 'axios';
 import { PIC_URL } from '../constants/axios';
+
+import * as Speech from 'expo-speech';
 
 const QuestionType = {
   IMAGE: 'IMAGE',
@@ -28,21 +30,39 @@ export function QuizScreen({ navigation, route }) {
 
   const question = questions[currentQ].attributes;
 
+  useEffect(() => {
+    let correctAnswer = question[Answer[question.correctAnswer]];
+    if (question.type === QuestionType.COLOR) {
+      correctAnswer = correctAnswer.split(',')[0];
+    }
+    Speech.speak(`Select ${correctAnswer}`, {
+      language: 'en',
+    });
+  }, [currentQ]);
+
   const selectAnswer = answer => {
     if (answer === selected) {
-      if (currentQ !== questions.length - 1) setCurrentQ(q => q + 1);
-      else {
+      setSelected(-1);
+      if (currentQ !== questions.length - 1) {
+        setCurrentQ(q => q + 1);
+      } else {
         (async () => {
-          axios.put(`/children/${kid.id}`, {
+          await axios.put(`/children/${kid.id}`, {
             data: {
               lastCompletedQuiz: kid.attributes.lastCompletedQuiz + 1,
             },
           });
+          navigation.replace('CongratsScreen');
         })();
-        navigation.replace('CongratsScreen');
       }
+    } else {
+      setSelected(answer);
+      let toSpeak = question[Answer[answer]];
+      if (question.type === QuestionType.COLOR) {
+        toSpeak = toSpeak.split(',')[0];
+      }
+      Speech.speak(toSpeak, { language: 'en' });
     }
-    setSelected(answer);
   };
 
   return (
