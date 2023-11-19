@@ -39,6 +39,9 @@ Parents can switch contexts through a Netflix style page. They can do this after
 To make sure the kids can't change this context, there's a parental guard in place that contains a problem that must be solved. Usually, children can't solve it.
 ![Parental Guard](./git-images/Parental%20Guard.png)
 
+## Figma
+Here's the [Figma](https://www.figma.com/file/2rzjrDoRchqEoSpiS7wTuG/UniHack---Learnly-%26-MyLearnlies?type=design&node-id=0%3A1&mode=design&t=UG7Bv9qhk8Aj6o2C-1) mockup for the implemented app.
+
 ## Team members
 + [Gabriela Butnaru](https://github.com/gabrielabutnaru)
 + [Dana Câmpan](https://github.com/danacampan)
