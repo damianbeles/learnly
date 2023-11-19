@@ -1,7 +1,9 @@
-import { Text, View } from 'react-native-ui-lib';
+import { Image, Text, View } from 'react-native-ui-lib';
 import { Colors } from '../constants/colors';
 import { useState } from 'react';
 import { TouchableOpacity } from 'react-native';
+import axios from 'axios';
+import { PIC_URL } from '../constants/axios';
 
 const QuestionType = {
   IMAGE: 'IMAGE',
@@ -29,7 +31,16 @@ export function QuizScreen({ navigation, route }) {
   const selectAnswer = answer => {
     if (answer === selected) {
       if (currentQ !== questions.length - 1) setCurrentQ(q => q + 1);
-      else navigation.replace('CongratsScreen');
+      else {
+        (async () => {
+          axios.put(`/children/${kid.id}`, {
+            data: {
+              lastCompletedQuiz: kid.attributes.lastCompletedQuiz + 1,
+            },
+          });
+        })();
+        navigation.replace('CongratsScreen');
+      }
     }
     setSelected(answer);
   };
@@ -48,13 +59,30 @@ export function QuizScreen({ navigation, route }) {
               <View
                 flex
                 br60
+                center
                 style={{
                   borderWidth: 6,
                   borderColor: selected === 1 ? Colors.black : Colors.alto,
                   ...(question.type === QuestionType.COLOR
                     ? { backgroundColor: question[Answer[1]].split(',')[1] }
                     : {}),
-                }}></View>
+                }}>
+                {question.type === QuestionType.NUMBER && (
+                  <Text answer>{question[Answer[1]]}</Text>
+                )}
+                {question.type === QuestionType.IMAGE && (
+                  <Image
+                    source={{
+                      uri:
+                        PIC_URL +
+                        question[`${Answer[1]}Pic`].data.attributes.url,
+                    }}
+                    height="100%"
+                    width="100%"
+                    resizeMode="contain"
+                  />
+                )}
+              </View>
             </TouchableOpacity>
           </View>
           <View flex padding-30 paddingH-60>
@@ -64,13 +92,30 @@ export function QuizScreen({ navigation, route }) {
               <View
                 flex
                 br60
+                center
                 style={{
                   borderWidth: 6,
                   borderColor: selected === 2 ? Colors.black : Colors.alto,
                   ...(question.type === QuestionType.COLOR
                     ? { backgroundColor: question[Answer[2]].split(',')[1] }
                     : {}),
-                }}></View>
+                }}>
+                {question.type === QuestionType.NUMBER && (
+                  <Text answer>{question[Answer[2]]}</Text>
+                )}
+                {question.type === QuestionType.IMAGE && (
+                  <Image
+                    source={{
+                      uri:
+                        PIC_URL +
+                        question[`${Answer[2]}Pic`].data.attributes.url,
+                    }}
+                    height="100%"
+                    width="100%"
+                    resizeMode="contain"
+                  />
+                )}
+              </View>
             </TouchableOpacity>
           </View>
         </View>
@@ -82,13 +127,30 @@ export function QuizScreen({ navigation, route }) {
               <View
                 flex
                 br60
+                center
                 style={{
                   borderWidth: 6,
                   borderColor: selected === 3 ? Colors.black : Colors.alto,
                   ...(question.type === QuestionType.COLOR
                     ? { backgroundColor: question[Answer[3]].split(',')[1] }
                     : {}),
-                }}></View>
+                }}>
+                {question.type === QuestionType.NUMBER && (
+                  <Text answer>{question[Answer[3]]}</Text>
+                )}
+                {question.type === QuestionType.IMAGE && (
+                  <Image
+                    source={{
+                      uri:
+                        PIC_URL +
+                        question[`${Answer[3]}Pic`].data.attributes.url,
+                    }}
+                    height="100%"
+                    width="100%"
+                    resizeMode="contain"
+                  />
+                )}
+              </View>
             </TouchableOpacity>
           </View>
           <View flex padding-30 paddingH-60>
@@ -98,13 +160,30 @@ export function QuizScreen({ navigation, route }) {
               <View
                 flex
                 br60
+                center
                 style={{
                   borderWidth: 6,
                   borderColor: selected === 4 ? Colors.black : Colors.alto,
                   ...(question.type === QuestionType.COLOR
                     ? { backgroundColor: question[Answer[4]].split(',')[1] }
                     : {}),
-                }}></View>
+                }}>
+                {question.type === QuestionType.NUMBER && (
+                  <Text answer>{question[Answer[4]]}</Text>
+                )}
+                {question.type === QuestionType.IMAGE && (
+                  <Image
+                    source={{
+                      uri:
+                        PIC_URL +
+                        question[`${Answer[4]}Pic`].data.attributes.url,
+                    }}
+                    height="100%"
+                    width="100%"
+                    resizeMode="contain"
+                  />
+                )}
+              </View>
             </TouchableOpacity>
           </View>
         </View>

@@ -22,10 +22,6 @@ export function LoginScreen() {
         identifier: username,
         password,
       })
-      .then(res => {
-        console.log(res.data.jwt);
-        return res;
-      })
       .then(res => signIn(res.data.jwt));
   };
 

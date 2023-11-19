@@ -61,5 +61,10 @@ export const configTheme = () => {
       fontFamily: 'Futura Medium BT',
       color: Colors.allports,
     },
+    answer: {
+      fontSize: 128,
+      fontFamily: 'Futura',
+      color: Colors.cerulean,
+    },
   });
 };
